@@ -1,7 +1,8 @@
 import React from "react";
-import Login from "./Login";
 import { Route, NavLink, Redirect, withRouter } from "react-router-dom";
 import Jokes from "./Jokes";
+import Login from "./Login";
+import Register from "./Register";
 
 function Container(props) {
   const withAuthCheck = (Component, props) => {
@@ -24,6 +25,7 @@ function Container(props) {
 
       <main>
         <Route exact path="/" component={Login} />
+        <Route exact path="/register" component={Register} />
         <Route
           exact
           path="/jokes"

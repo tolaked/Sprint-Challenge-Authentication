@@ -8,49 +8,49 @@ function Login(props) {
     username: "",
     password: ""
   };
-  const [user, setuser] = useState(initialState);
+  const [newUser, setnewUser] = useState(initialState);
 
   const submitInfo = (event, credentials) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3300/api/auth/login", credentials)
+      .post("http://localhost:3300/api/auth/register", credentials)
       .then(res => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("token", res.data.data.token);
 
-        console.log(res.data.token);
         props.history.push("/jokes");
       })
       .catch(err => console.log(err));
   };
 
-  const handleUser = event => {
+  const handleNewUser = event => {
     const { name, value } = event.target;
-    setuser({ ...user, [name]: value });
+    setnewUser({ ...newUser, [name]: value });
   };
 
   return (
     <div>
-      <div>
-        <StyledForm onSubmit={e => submitInfo(e, user)}>
+      <div className="SignupformContainer">
+        <StyledForm onSubmit={e => submitInfo(e, newUser)}>
           <StyledH3>Please enter your credentials to sign up</StyledH3>
-          <Label>username</Label>
-          <StyledInput
-            type="text"
-            value={user.username}
-            name="username"
-            onChange={handleUser}
-          />
-          <Label>password</Label>
-          <StyledInput
-            type="text"
-            value={user.password}
-            name="password"
-            onChange={handleUser}
-          />
-          <StyledButton>Login</StyledButton>
-          <p>
-            Don't have an account? <Link to="/register">Sign up here</Link>
-          </p>
+          <Label>
+            username
+            <StyledInput
+              type="text"
+              value={newUser.username}
+              name="username"
+              onChange={handleNewUser}
+            />
+          </Label>
+          <Label>
+            password
+            <StyledInput
+              type="text"
+              value={newUser.password}
+              name="password"
+              onChange={handleNewUser}
+            />
+          </Label>
+          <StyledButton>Join the platform</StyledButton>
         </StyledForm>
       </div>
     </div>
