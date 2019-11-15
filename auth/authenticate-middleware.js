@@ -8,10 +8,10 @@ const User = require("../User/user-Model");
 
 module.exports = (req, res, next) => {
   // Authorization
-  const { token } = req.headers;
+  const { authorization } = req.headers;
 
   // check if user provides a token
-  if (!token) {
+  if (!authorization) {
     return res.status(403).json({
       status: 403,
       error: "Unauthorize, please login"
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
   // check if token is valid
   try {
     // decode and get token
-    const decodedToken = jwt.verify(token, "D4RE!EFGF");
+    const decodedToken = jwt.verify(authorization, "D4RE!EFGF");
 
     // find user by email
     const user = User.findBy(decodedToken.username).first();

@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-
-import Jokes from "./component/Jokes";
+import Container from "./component/container";
 
 function App() {
   return (
     <div className="App">
-      <Jokes />
+      <Container />
+      {/* <Jokes /> */}
     </div>
   );
 }
